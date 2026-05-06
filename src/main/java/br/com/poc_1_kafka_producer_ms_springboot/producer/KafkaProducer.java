@@ -1,6 +1,6 @@
-package br.com.poc_1_kafka_cadastro_pedido_ms_springboot.producer;
+package br.com.poc_1_kafka_producer_ms_springboot.producer;
 
-import br.com.poc_1_kafka_cadastro_pedido_ms_springboot.dto.ProducerDTO;
+import br.com.poc_1_kafka_producer_ms_springboot.dto.ProducerDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -17,22 +17,22 @@ public class KafkaProducer {
     private final ObjectMapper objectMapper;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${config.kafka.topics.pedidos-criados}")
+    @Value("${config.kafka.topics.poc-1-messages}")
     private String topico;
 
-    public void publicar(
+    public void publish(
             ProducerDTO producerDTO
     ) {
 
-        log.info("Publicando pedido.");
+        log.info("Publicando mensagem...");
 
         try {
             var json = objectMapper.writeValueAsString(producerDTO);
             kafkaTemplate.send(topico, "pedidos", json);
         } catch (JsonProcessingException jsonProcessingException) {
-            log.error("Erro ao processar o json do pedido criado", jsonProcessingException);
+            log.error("Erro ao processar o json da mensagem", jsonProcessingException);
         } catch (RuntimeException runtimeException) {
-            log.error("Erro técnico ao publicar pedido", runtimeException);
+            log.error("Erro técnico ao publicar a mensagem", runtimeException);
         }
     }
 

@@ -1,7 +1,7 @@
-package br.com.poc_1_kafka_cadastro_pedido_ms_springboot.useCase;
+package br.com.poc_1_kafka_producer_ms_springboot.useCase;
 
-import br.com.poc_1_kafka_cadastro_pedido_ms_springboot.dto.ProducerDTO;
-import br.com.poc_1_kafka_cadastro_pedido_ms_springboot.producer.KafkaProducer;
+import br.com.poc_1_kafka_producer_ms_springboot.dto.ProducerDTO;
+import br.com.poc_1_kafka_producer_ms_springboot.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class ProducerUseCase {
     public void execute(
             ProducerDTO producerDTO
     ) {
-        kafkaProducer.publicar(producerDTO);
+        kafkaProducer.publish(producerDTO);
     }
 
 }
